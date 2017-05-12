@@ -1,14 +1,13 @@
 package br.com.fatec.domain;
 
 import br.com.fatec.domain.enuns.UserStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,9 +28,9 @@ public class User {
     @NotNull
     private UserStatus userStatus;
 
-    private Double userWidth;
-    private Double userHeight;
-    private Double userLength;
+    @JsonIgnore
+    @OneToMany(mappedBy="user")
+    private List<Garden> gardens;
 
     @NotNull
     private Date userDateCreated;
