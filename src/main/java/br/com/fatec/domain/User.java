@@ -21,18 +21,10 @@ public class User {
     private String userName;
     @NotNull
     private String userLogin;
-    @NotNull
     private String userPassword;
-    @NotNull
     private String userMail;
-    @NotNull
+
     private UserStatus userStatus;
-
-    @JsonIgnore
-    @OneToMany(mappedBy="user")
-    private List<Garden> gardens;
-
-    @NotNull
     private Date userDateCreated;
     private Date userDateUpdated;
 

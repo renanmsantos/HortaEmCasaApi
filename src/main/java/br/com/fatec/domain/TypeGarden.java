@@ -20,11 +20,11 @@ public class TypeGarden {
     private Double typeWidth;
     private Double typeHeight;
     private Double typeLength;
-    @Lob
+    @Column(columnDefinition="TEXT")
     private String typeHowToDo;
+
     @NotNull
     private TypeStatus typeStatus;
-
     @NotNull
     private Date typeDateCreated;
     private Date typeDateUpdated;

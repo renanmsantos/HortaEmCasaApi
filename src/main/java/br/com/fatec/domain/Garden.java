@@ -1,10 +1,11 @@
 package br.com.fatec.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.fatec.domain.enuns.GardenStatus;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,14 +15,14 @@ public class Garden {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long gardenId;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn
-    private User user;
+    private Double gardenWidth;
+    private Double gardenHeight;
+    private Double gardenLength;
 
-    private Double userWidth;
-    private Double userHeight;
-    private Double userLength;
-
-
+    @NotNull
+    private GardenStatus gardenStatus;
+    @NotNull
+    private Date gardenDateCreated;
+    private Date gardenDateUpdated;
 
 }
