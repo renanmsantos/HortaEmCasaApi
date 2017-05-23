@@ -1,19 +1,21 @@
 package br.com.fatec.domain;
 
 import br.com.fatec.domain.enuns.TypeStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
-public class TypeGarden {
+public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long typeGardenId;
+    private Long typeId;
 
     private String typeName;
     private String typeDescription;
@@ -23,11 +25,15 @@ public class TypeGarden {
     @Column(columnDefinition="TEXT")
     private String typeHowToDo;
 
-    @NotNull
     private TypeStatus typeStatus;
-    @NotNull
     private Date typeDateCreated;
     private Date typeDateUpdated;
+
+    @ManyToMany
+    @JoinTable(name = "listPlant",
+            joinColumns={@JoinColumn(name="typeId")},
+            inverseJoinColumns= {@JoinColumn(name="PlantId")})
+    private List<Plant> plants;
 
 
 }

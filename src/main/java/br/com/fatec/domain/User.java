@@ -28,4 +28,8 @@ public class User {
     private Date userDateCreated;
     private Date userDateUpdated;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Garden garden;
+
 }

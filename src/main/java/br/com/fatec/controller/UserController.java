@@ -20,7 +20,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/{id}")
+    @RequestMapping(method=RequestMethod.GET, value="/{userId}")
     public User getUserById( @PathVariable Long userId ){
         User user = userService.getUserById(userId);
         return user;

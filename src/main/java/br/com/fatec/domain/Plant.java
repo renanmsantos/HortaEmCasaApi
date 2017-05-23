@@ -18,18 +18,16 @@ public class Plant {
     @NotNull
     private String plantName;
     private String plantDescription;
-    @Lob
+    @Column(columnDefinition="TEXT")
     private String plantHowToPlant;
     @NotNull
     private Integer plantWeekPeriodicityWater;
     @NotNull
     private Integer plantWeekPeriodicityCare;
-
     private String plantPathImage;
 
-    @NotNull
     private PlantStatus plantStatus;
-    @NotNull
+
     private Date plantDateCreated;
     private Date plantDateUpdated;
 

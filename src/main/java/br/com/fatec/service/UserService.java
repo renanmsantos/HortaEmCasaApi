@@ -33,9 +33,13 @@ public class UserService {
 
         User userOrigin = getUserById(userUpdated.getUserId());
 
+        userOrigin.setUserName(userUpdated.getUserName());
         userOrigin.setUserLogin(userUpdated.getUserLogin());
-        userOrigin.setUserDateUpdated(new Date());
         userOrigin.setUserMail(userUpdated.getUserMail());
+
+        userOrigin.setUserDateUpdated(new Date());
+
+        /** TODO : Fazer update do Garden deste usuário */
 
         entityManager.merge(userOrigin);
 
