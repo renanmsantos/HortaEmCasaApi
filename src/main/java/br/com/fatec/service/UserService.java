@@ -1,5 +1,6 @@
 package br.com.fatec.service;
 
+import br.com.fatec.domain.Garden;
 import br.com.fatec.domain.User;
 import br.com.fatec.domain.enuns.UserStatus;
 import com.mysema.query.jpa.impl.JPAQuery;
@@ -19,9 +20,14 @@ public class UserService {
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private GardenService gardenService;
+
     @Transactional
     public void newUser(User user) {
 
+        Garden gardenReference = gardenService.getGardenById(user.getGarden().getGardenId());
+        user.setGarden(gardenReference);
         user.setUserStatus(UserStatus.ACTIVE);
         user.setUserDateCreated(new Date());
 
@@ -32,14 +38,14 @@ public class UserService {
     public void updateUser(User userUpdated) {
 
         User userOrigin = getUserById(userUpdated.getUserId());
+        Garden gardenReference = gardenService.getGardenById(userUpdated.getGarden().getGardenId());
 
+        userOrigin.setGarden(gardenReference);
         userOrigin.setUserName(userUpdated.getUserName());
         userOrigin.setUserLogin(userUpdated.getUserLogin());
         userOrigin.setUserMail(userUpdated.getUserMail());
 
         userOrigin.setUserDateUpdated(new Date());
-
-        /** TODO : Fazer update do Garden deste usuário */
 
         entityManager.merge(userOrigin);
 
