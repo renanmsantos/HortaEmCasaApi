@@ -2,9 +2,13 @@ package br.com.fatec.service;
 
 import br.com.fatec.domain.Garden;
 import br.com.fatec.domain.User;
+import br.com.fatec.domain.UserPrincipal;
 import br.com.fatec.domain.enuns.UserStatus;
 import com.mysema.query.jpa.impl.JPAQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +19,7 @@ import java.util.List;
 import static br.com.fatec.domain.QUser.user;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private EntityManager entityManager;
@@ -72,4 +76,19 @@ public class UserService {
         return entityManager.find(User.class, idUser);
     }
 
+    public User getUserByLogin(String loginUser) {
+        return new JPAQuery(entityManager)
+                .from(user)
+                .where(user.userLogin.eq(loginUser))
+                .uniqueResult(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = getUserByLogin(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new UserPrincipal(user);
+    }
 }

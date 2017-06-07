@@ -32,7 +32,7 @@ public class Type {
     @ManyToMany
     @JoinTable(name = "listPlant",
             joinColumns={@JoinColumn(name="typeId")},
-            inverseJoinColumns= {@JoinColumn(name="PlantId")})
+            inverseJoinColumns= {@JoinColumn(name="plantId")})
     private List<Plant> plants;
 
 
