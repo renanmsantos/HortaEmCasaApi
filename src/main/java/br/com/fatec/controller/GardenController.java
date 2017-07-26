@@ -32,6 +32,12 @@ public class GardenController {
         return garden;
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/teste")
+    public Garden newGardenTeste(@RequestBody @Valid Garden garden){
+        gardenService.newGarden(garden);
+        return garden;
+    }
+
     @RequestMapping(method=RequestMethod.PUT, value="/{gardenId}")
     public Garden updateGarden(@PathVariable Long gardenId, @RequestBody @Valid Garden garden ){
         garden.setGardenId(gardenId);

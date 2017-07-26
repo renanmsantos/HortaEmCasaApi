@@ -26,6 +26,12 @@ public class UserController {
         return user;
     }
 
+    @RequestMapping(method=RequestMethod.GET, value="/login/{userLogin}")
+    public User getUserById( @PathVariable String userLogin ){
+        User user = userService.getUserByLogin(userLogin);
+        return user;
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public User newUser(@RequestBody @Valid User user){
         userService.newUser(user);
